@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ba48da081f94d0e88f5390151793925" Name="Diagram1">
+        <EntityTypeShape EntityType="Roda.DataAccess.Model.Jogo" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Roda.DataAccess.Model.PlacaVideo" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Roda.DataAccess.Model.Processador" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="Roda.DataAccess.Model.rod_placa_video_fk_rod_placa_video_rod_placa_video1" ManuallyRouted="false" />
+        <AssociationConnector Association="Roda.DataAccess.Model.rod_processador_fk_rod_processador_rod_processador" ManuallyRouted="false" />
+        <AssociationConnector Association="Roda.DataAccess.Model.rod_jogo_placa_video" ManuallyRouted="false" />
+        <AssociationConnector Association="Roda.DataAccess.Model.rod_jogo_processador" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

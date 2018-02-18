@@ -1,0 +1,96 @@
+﻿@using Roda.Web.Utils
+@using Roda.Web.Models
+@model CookieRoda
+@{
+    CookieRoda cookie = Model == null ? new CookieRoda() : Model;
+}
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">                
+                <h1 class="text-center">RODA!?</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    @using (Html.BeginForm("VerificarJogos", "Jogos", FormMethod.Get, new { @id = "FormularioVerificarJogos"}))
+                    {
+                        <div class="form-group select2">
+                            <label for="Processador">Processador</label>
+                            @Html.DropDownList("Processador", Utilidades.obterSelectListProcessadores(cookie.IDProcessador), new { @class = "select2 form-control", @required="required" })
+                        </div>
+                        <div class="form-group select2">
+                            <label for="PlacaVideo">Placa de Vídeo</label>
+                            @Html.DropDownList("PlacaVideo", Utilidades.obterSelectListPlacasVideo(cookie.IDPlacaVideo), new { @class = "select2 form-control" })
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="QuantidadeMemoria">Quantidade Memória RAM</label>
+                                @Html.TextBox("QuantidadeMemoria", cookie.Memoria == 0.0 ? "" : cookie.Memoria.ToString(), new { @class="form-control", @maxlength = 8 })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="QuantidadeHD">Quantidade HD disponível</label>
+                                @Html.TextBox("QuantidadeHD", cookie.HD == 0.0 ? "" : cookie.HD.ToString(), new { @class = "form-control", @maxlength = 8 })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-block btn-lg" style="background-color: #ff851b; border-color: #ff851b; color: #FFFFFF">Selecionar Jogo</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+    <script>
+        $(function () {
+            $('#Processador').select2({ placeholder: 'Selecione o modelo de processador', allowClear: true });
+            $('#PlacaVideo').select2({ placeholder: 'Selecione a placa de vídeo', allowClear: true });
+            $('#QuantidadeMemoria').numerico({ allowDecimal: true });
+            $('#QuantidadeHD').numerico({ allowDecimal: true });
+
+            $('#FormularioVerificarJogos').validate({
+                rules: {
+                    Processador: {
+                        required: true
+                    },
+                    PlacaVideo: {
+                        required: true
+                    },
+                    QuantidadeMemoria: {
+                        required: true
+                    },
+                    QuantidadeHD: {
+                        required: true
+                    }
+                },
+                messages: {
+                    Processador: {
+                        required: 'Selecione um processador!'
+                    },
+                    PlacaVideo: {
+                        required: 'Selecione uma placa de vídeo!'
+                    },
+                    QuantidadeMemoria: {
+                        required: 'Preencha a quantidade de memória RAM!'
+                    },
+                    QuantidadeHD: {
+                        required: 'Preencha a quantidade de HD disponível!'
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    if (element.parent().children('.input-group-addon').size() > 0) {
+                        error.insertAfter(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+        })
+    </script>
+}

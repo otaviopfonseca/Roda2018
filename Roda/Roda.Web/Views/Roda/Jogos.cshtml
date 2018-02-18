@@ -1,0 +1,26 @@
+﻿@using Roda.Entities
+@model List<JogoEntity>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Jogos</h1>
+                <p class="text-center lead">Escolha um jogo</p>
+            </div>
+        </div><div class="row"><div class="col-md-12"><hr></div></div>
+        @for(int c_jogo = 0; c_jogo < Model.Count; ++c_jogo)
+        {
+            if (c_jogo % 4 == 0)
+            {
+                Html.Raw("<div class=\"row\">");
+            }
+            <div class="col-md-3">                
+                <a href="@Url.Action("DetalhesJogo", "Jogos", new { idJogo = Model[c_jogo].ID })"><img src="@Model[c_jogo].UrlImagem" class="img-responsive img-thumbnail" /></a>
+            </div>           
+            if (c_jogo % 4 == 0)
+            {
+                Html.Raw("</div>");
+            }        
+        }
+    </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "siteName": {
+    "value": "Roda"
+  },
+  "hostingPlanName": {
+    "value": "MvcAzurePlan"
+  },
+  "siteLocation": {
+    "value": "Brazil South"
+  },
+  "sku": {
+    "value": "Free"
+  },
+  "workerSize": {
+    "value": "0"
+  },
+  "siteMode": {
+    "value": "Limited"
+  },
+  "computeMode": {
+    "value": "0"
+  },
+  "subscriptionId": {
+    "value": "7db3054b-43e7-48e0-93b3-3329e39702b4"
+  },
+  "resourceGroup": {
+    "value": "MvcAzureGroup"
+  }
+}

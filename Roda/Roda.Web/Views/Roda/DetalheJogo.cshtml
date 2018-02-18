@@ -1,0 +1,30 @@
+﻿@using Roda.Entities
+@model JogoEntity
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="@Model.UrlImagem" class="img-responsive">
+            </div>
+            <div class="col-md-6">
+                <h1>@Model.Nome</h1>
+                <p>@Model.Descricao</p>
+                <p>
+                    @if(!String.IsNullOrWhiteSpace(Model.DescricaoRequisitos))
+                    {
+                        @Html.Raw(Model.DescricaoRequisitos.Replace("<br>", "<br />"))
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("VerificarCompativel", "Jogos", new { idJogo = Model.ID })" class="btn btn-block btn-lg btn-padrao">RODA?!</a>
+            </div>
+        </div>
+    </div>
+</div>

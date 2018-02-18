@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roda?!</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="section section-warning text-left">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="@Url.Action("Home", "Jogos")">Home</a>
+                        </li>
+                        <li class="active">
+                            <a href="@Url.Action("Jogos", "Jogos")">Jogos</a>
+                        </li>
+                        <li class="active">
+                            <a href="@Url.Action("Sobre", "Jogos")">Sobre</a>
+                        </li>
+                        <li class="active">
+                            <a href="@Url.Action("NovoJogo", "Jogos")">Novo Jogo</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Black & White</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

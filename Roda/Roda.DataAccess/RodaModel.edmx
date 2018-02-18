@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Roda.DataAccess.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="rod_jogo">
+          <Key>
+            <PropertyRef Name="id_jogo" />
+          </Key>
+          <Property Name="id_jogo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_jogo" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="desc_jogo" Type="varchar" MaxLength="1000" />
+          <Property Name="url_imagem" Type="varchar" MaxLength="250" />
+          <Property Name="nom_empresa" Type="varchar" MaxLength="45" />
+          <Property Name="qtd_mem_minimo" Type="int" />
+          <Property Name="qtd_hd_minimo" Type="int" />
+          <Property Name="desc_requisitos" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="rod_jogo_placa_video">
+          <Key>
+            <PropertyRef Name="id_jogo" />
+            <PropertyRef Name="id_placa_video" />
+          </Key>
+          <Property Name="id_jogo" Type="int" Nullable="false" />
+          <Property Name="id_placa_video" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rod_jogo_processador">
+          <Key>
+            <PropertyRef Name="id_jogo" />
+            <PropertyRef Name="id_processador" />
+          </Key>
+          <Property Name="id_jogo" Type="int" Nullable="false" />
+          <Property Name="id_processador" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rod_placa_video">
+          <Key>
+            <PropertyRef Name="id_placa_video" />
+          </Key>
+          <Property Name="id_placa_video" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_placa_video" Type="nvarchar" MaxLength="250" />
+          <Property Name="qtd_clock" Type="float" />
+          <Property Name="vlr_potencia" Type="int" />
+          <Property Name="id_equivalencia" Type="int" />
+        </EntityType>
+        <EntityType Name="rod_processador">
+          <Key>
+            <PropertyRef Name="id_processador" />
+          </Key>
+          <Property Name="id_processador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_processador" Type="nvarchar" MaxLength="250" />
+          <Property Name="qtd_ghz" Type="float" />
+          <Property Name="id_equivalente" Type="int" />
+          <Property Name="vlr_potencia" Type="int" />
+        </EntityType>
+        <Association Name="rod_jogo_placa_video$fk_rod_jogo_has_rod_placa_video_rod_jogo1">
+          <End Role="rod_jogo" Type="Self.rod_jogo" Multiplicity="1" />
+          <End Role="rod_jogo_placa_video" Type="Self.rod_jogo_placa_video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rod_jogo">
+              <PropertyRef Name="id_jogo" />
+            </Principal>
+            <Dependent Role="rod_jogo_placa_video">
+              <PropertyRef Name="id_jogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rod_jogo_placa_video$fk_rod_jogo_has_rod_placa_video_rod_placa_video1">
+          <End Role="rod_placa_video" Type="Self.rod_placa_video" Multiplicity="1" />
+          <End Role="rod_jogo_placa_video" Type="Self.rod_jogo_placa_video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rod_placa_video">
+              <PropertyRef Name="id_placa_video" />
+            </Principal>
+            <Dependent Role="rod_jogo_placa_video">
+              <PropertyRef Name="id_placa_video" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rod_jogo_processador$fk_rod_jogo_has_rod_process_rod_jogo1">
+          <End Role="rod_jogo" Type="Self.rod_jogo" Multiplicity="1" />
+          <End Role="rod_jogo_processador" Type="Self.rod_jogo_processador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rod_jogo">
+              <PropertyRef Name="id_jogo" />
+            </Principal>
+            <Dependent Role="rod_jogo_processador">
+              <PropertyRef Name="id_jogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rod_jogo_processador$fk_rod_jogo_has_rod_process_rod_process1">
+          <End Role="rod_processador" Type="Self.rod_processador" Multiplicity="1" />
+          <End Role="rod_jogo_processador" Type="Self.rod_jogo_processador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rod_processador">
+              <PropertyRef Name="id_processador" />
+            </Principal>
+            <Dependent Role="rod_jogo_processador">
+              <PropertyRef Name="id_processador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rod_placa_video$fk_rod_placa_video_rod_placa_video1">
+          <End Role="rod_placa_video" Type="Self.rod_placa_video" Multiplicity="0..1" />
+          <End Role="rod_placa_video1" Type="Self.rod_placa_video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rod_placa_video">
+              <PropertyRef Name="id_placa_video" />
+            </Principal>
+            <Dependent Role="rod_placa_video1">
+              <PropertyRef Name="id_equivalencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rod_processador$fk_rod_processador_rod_processador">
+          <End Role="rod_processador" Type="Self.rod_processador" Multiplicity="0..1" />
+          <End Role="rod_processador1" Type="Self.rod_processador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rod_processador">
+              <PropertyRef Name="id_processador" />
+            </Principal>
+            <Dependent Role="rod_processador1">
+              <PropertyRef Name="id_equivalente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RodaDataAccessModelStoreContainer">
+          <EntitySet Name="rod_jogo" EntityType="Self.rod_jogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rod_jogo_placa_video" EntityType="Self.rod_jogo_placa_video" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rod_jogo_processador" EntityType="Self.rod_jogo_processador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rod_placa_video" EntityType="Self.rod_placa_video" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rod_processador" EntityType="Self.rod_processador" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="rod_jogo_placa_video$fk_rod_jogo_has_rod_placa_video_rod_jogo1" Association="Self.rod_jogo_placa_video$fk_rod_jogo_has_rod_placa_video_rod_jogo1">
+            <End Role="rod_jogo" EntitySet="rod_jogo" />
+            <End Role="rod_jogo_placa_video" EntitySet="rod_jogo_placa_video" />
+          </AssociationSet>
+          <AssociationSet Name="rod_jogo_placa_video$fk_rod_jogo_has_rod_placa_video_rod_placa_video1" Association="Self.rod_jogo_placa_video$fk_rod_jogo_has_rod_placa_video_rod_placa_video1">
+            <End Role="rod_placa_video" EntitySet="rod_placa_video" />
+            <End Role="rod_jogo_placa_video" EntitySet="rod_jogo_placa_video" />
+          </AssociationSet>
+          <AssociationSet Name="rod_jogo_processador$fk_rod_jogo_has_rod_process_rod_jogo1" Association="Self.rod_jogo_processador$fk_rod_jogo_has_rod_process_rod_jogo1">
+            <End Role="rod_jogo" EntitySet="rod_jogo" />
+            <End Role="rod_jogo_processador" EntitySet="rod_jogo_processador" />
+          </AssociationSet>
+          <AssociationSet Name="rod_jogo_processador$fk_rod_jogo_has_rod_process_rod_process1" Association="Self.rod_jogo_processador$fk_rod_jogo_has_rod_process_rod_process1">
+            <End Role="rod_processador" EntitySet="rod_processador" />
+            <End Role="rod_jogo_processador" EntitySet="rod_jogo_processador" />
+          </AssociationSet>
+          <AssociationSet Name="rod_placa_video$fk_rod_placa_video_rod_placa_video1" Association="Self.rod_placa_video$fk_rod_placa_video_rod_placa_video1">
+            <End Role="rod_placa_video" EntitySet="rod_placa_video" />
+            <End Role="rod_placa_video1" EntitySet="rod_placa_video" />
+          </AssociationSet>
+          <AssociationSet Name="rod_processador$fk_rod_processador_rod_processador" Association="Self.rod_processador$fk_rod_processador_rod_processador">
+            <End Role="rod_processador" EntitySet="rod_processador" />
+            <End Role="rod_processador1" EntitySet="rod_processador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Roda.DataAccess.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Jogo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="UrlImagem" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NomeEmpresa" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="MinimoMemoria" Type="Int32" />
+          <Property Name="MinimoHD" Type="Int32" />
+          <NavigationProperty Name="PlacasCompativeis" Relationship="Self.rod_jogo_placa_video" FromRole="rod_jogo" ToRole="rod_placa_video" />
+          <NavigationProperty Name="ProcessadoresCompativeis" Relationship="Self.rod_jogo_processador" FromRole="rod_jogo" ToRole="rod_processador" />
+          <Property Name="DescricaoRequisitos" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PlacaVideo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Clock" Type="Double" />
+          <Property Name="Potencia" Type="Int32" />
+          <Property Name="IDPlacaEquivalente" Type="Int32" />
+          <NavigationProperty Name="PlacasEquivalentes" Relationship="Self.rod_placa_video_fk_rod_placa_video_rod_placa_video1" FromRole="rod_placa_video" ToRole="rod_placa_video1" />
+          <NavigationProperty Name="Jogos" Relationship="Self.rod_jogo_placa_video" FromRole="rod_placa_video" ToRole="rod_jogo" />
+        </EntityType>
+        <EntityType Name="Processador">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Clock" Type="Double" />
+          <Property Name="IDProcessadorEquivalente" Type="Int32" />
+          <Property Name="Potencia" Type="Int32" />
+          <NavigationProperty Name="ProcessadoresEquivalentes" Relationship="Self.rod_processador_fk_rod_processador_rod_processador" FromRole="rod_processador" ToRole="rod_processador1" />
+          <NavigationProperty Name="Jogos" Relationship="Self.rod_jogo_processador" FromRole="rod_processador" ToRole="rod_jogo" />
+        </EntityType>
+        <Association Name="rod_placa_video_fk_rod_placa_video_rod_placa_video1">
+          <End Role="rod_placa_video" Type="Roda.DataAccess.Model.PlacaVideo" Multiplicity="0..1" />
+          <End Role="rod_placa_video1" Type="Roda.DataAccess.Model.PlacaVideo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rod_placa_video">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="rod_placa_video1">
+              <PropertyRef Name="IDPlacaEquivalente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rod_processador_fk_rod_processador_rod_processador">
+          <End Role="rod_processador" Type="Roda.DataAccess.Model.Processador" Multiplicity="0..1" />
+          <End Role="rod_processador1" Type="Roda.DataAccess.Model.Processador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rod_processador">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="rod_processador1">
+              <PropertyRef Name="IDProcessadorEquivalente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rod_jogo_placa_video">
+          <End Role="rod_jogo" Type="Roda.DataAccess.Model.Jogo" Multiplicity="*" />
+          <End Role="rod_placa_video" Type="Roda.DataAccess.Model.PlacaVideo" Multiplicity="*" />
+        </Association>
+        <Association Name="rod_jogo_processador">
+          <End Role="rod_jogo" Type="Roda.DataAccess.Model.Jogo" Multiplicity="*" />
+          <End Role="rod_processador" Type="Roda.DataAccess.Model.Processador" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="RodaContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="rod_jogo" EntityType="Roda.DataAccess.Model.Jogo" />
+          <EntitySet Name="rod_placa_video" EntityType="Roda.DataAccess.Model.PlacaVideo" />
+          <EntitySet Name="rod_processador" EntityType="Roda.DataAccess.Model.Processador" />
+          <AssociationSet Name="rod_placa_video_fk_rod_placa_video_rod_placa_video1" Association="Self.rod_placa_video_fk_rod_placa_video_rod_placa_video1">
+            <End Role="rod_placa_video" EntitySet="rod_placa_video" />
+            <End Role="rod_placa_video1" EntitySet="rod_placa_video" />
+          </AssociationSet>
+          <AssociationSet Name="rod_processador_fk_rod_processador_rod_processador" Association="Self.rod_processador_fk_rod_processador_rod_processador">
+            <End Role="rod_processador" EntitySet="rod_processador" />
+            <End Role="rod_processador1" EntitySet="rod_processador" />
+          </AssociationSet>
+          <AssociationSet Name="rod_jogo_placa_video" Association="Self.rod_jogo_placa_video">
+            <End Role="rod_jogo" EntitySet="rod_jogo" />
+            <End Role="rod_placa_video" EntitySet="rod_placa_video" />
+          </AssociationSet>
+          <AssociationSet Name="rod_jogo_processador" Association="Self.rod_jogo_processador">
+            <End Role="rod_jogo" EntitySet="rod_jogo" />
+            <End Role="rod_processador" EntitySet="rod_processador" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RodaDataAccessModelStoreContainer" CdmEntityContainer="RodaContext">
+          <EntitySetMapping Name="rod_jogo">
+            <EntityTypeMapping TypeName="Roda.DataAccess.Model.Jogo">
+              <MappingFragment StoreEntitySet="rod_jogo">
+                <ScalarProperty Name="DescricaoRequisitos" ColumnName="desc_requisitos" />
+                <ScalarProperty Name="ID" ColumnName="id_jogo" />
+                <ScalarProperty Name="Nome" ColumnName="nom_jogo" />
+                <ScalarProperty Name="Descricao" ColumnName="desc_jogo" />
+                <ScalarProperty Name="UrlImagem" ColumnName="url_imagem" />
+                <ScalarProperty Name="NomeEmpresa" ColumnName="nom_empresa" />
+                <ScalarProperty Name="MinimoMemoria" ColumnName="qtd_mem_minimo" />
+                <ScalarProperty Name="MinimoHD" ColumnName="qtd_hd_minimo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rod_placa_video">
+            <EntityTypeMapping TypeName="Roda.DataAccess.Model.PlacaVideo">
+              <MappingFragment StoreEntitySet="rod_placa_video">
+                <ScalarProperty Name="ID" ColumnName="id_placa_video" />
+                <ScalarProperty Name="Descricao" ColumnName="desc_placa_video" />
+                <ScalarProperty Name="Clock" ColumnName="qtd_clock" />
+                <ScalarProperty Name="Potencia" ColumnName="vlr_potencia" />
+                <ScalarProperty Name="IDPlacaEquivalente" ColumnName="id_equivalencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rod_processador">
+            <EntityTypeMapping TypeName="Roda.DataAccess.Model.Processador">
+              <MappingFragment StoreEntitySet="rod_processador">
+                <ScalarProperty Name="ID" ColumnName="id_processador" />
+                <ScalarProperty Name="Descricao" ColumnName="desc_processador" />
+                <ScalarProperty Name="Clock" ColumnName="qtd_ghz" />
+                <ScalarProperty Name="IDProcessadorEquivalente" ColumnName="id_equivalente" />
+                <ScalarProperty Name="Potencia" ColumnName="vlr_potencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="rod_jogo_placa_video" TypeName="Roda.DataAccess.Model.rod_jogo_placa_video" StoreEntitySet="rod_jogo_placa_video">
+            <EndProperty Name="rod_jogo">
+              <ScalarProperty Name="ID" ColumnName="id_jogo" />
+            </EndProperty>
+            <EndProperty Name="rod_placa_video">
+              <ScalarProperty Name="ID" ColumnName="id_placa_video" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="rod_jogo_processador" TypeName="Roda.DataAccess.Model.rod_jogo_processador" StoreEntitySet="rod_jogo_processador">
+            <EndProperty Name="rod_jogo">
+              <ScalarProperty Name="ID" ColumnName="id_jogo" />
+            </EndProperty>
+            <EndProperty Name="rod_processador">
+              <ScalarProperty Name="ID" ColumnName="id_processador" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

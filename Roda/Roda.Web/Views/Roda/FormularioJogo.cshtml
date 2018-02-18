@@ -1,0 +1,54 @@
+﻿@using Roda.Entities
+@using Roda.Web.Utils
+@model JogoEntity
+
+<div><header><h1>Novo Jogo/Edicao</h1></header></div>
+@using (Html.BeginForm("SalvarJogo", "Jogos"))
+{ 
+    <div class="form-group">
+        <label for="NomeJogo">Título do Jogo</label>
+        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", @id = "Nome", @placeholder = "Título" })
+    </div>
+
+    <div class="form-group">
+        <label for="DescricaoJogo">Insira a Descrição do Jogo</label>
+        @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", @id = "DescricaoJogo" })
+    </div>
+
+    <div class="form-group">
+        <label for="Imagem">Insira a URL da Imagem do Jogo</label>
+        @Html.TextBoxFor(model => model.UrlImagem, new { @class = "form-control", @id = "Nome", @placeholder = "URL" })
+    </div>
+
+    <div class="form-group">
+        <label for="Empresa">Insira a Empresa Fabricante</label>
+        @Html.TextBoxFor(model => model.NomeEmpresa, new { @class = "form-control", @id = "Empresa", @placeholder="Empresa" })
+    </div>
+
+    <div class="form-group">
+        <label for="HD">Insira a Quantidade de HD que o jogo ocupa</label>
+        @Html.TextBoxFor(model => model.MinimoHD, new { @class = "form-control", @id = "HD", @placeholder = "HD" })
+    </div>
+
+    <div class="form-group">
+        <label for="RAM">Insira a Quantidade de memória RAM mínima</label>
+        @Html.TextBoxFor(model => model.MinimoMemoria, new { @class = "form-control", @id = "RAM", @placeholder = "RAM" })
+    </div>
+
+    <div class="form-group">
+        <label for="Requisitos">Insiria os Requisitos mínimos do jogo</label>
+        @Html.TextAreaFor(model => model.DescricaoRequisitos, new { @class = "form-control", @id = "Requisitos" })
+    </div>
+    <div>
+        <label for="IDPlaca">Selecione uma placa de vídeo</label>
+        @Html.DropDownListFor(model => model.IDPlaca, Utilidades.obterSelectListPlacasVideo(Model != null ? Model.IDPlaca : 0), new { @class= "form-control" })
+    </div>
+    <div>
+        <label for="IDProcessador">Selecione um processador</label>
+        @Html.DropDownListFor(model => model.IDProcessador, Utilidades.obterSelectListProcessadores(Model != null ? Model.IDProcessador  : 0), new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+}
