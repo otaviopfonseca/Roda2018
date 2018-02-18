@@ -36,6 +36,29 @@ namespace Roda.DataAccess
             }
         }
 
+        public void EditarJogo(Jogo jogo, int idProcessador, int idPlaca)
+        {
+            using (RodaContext contexto = new RodaContext())
+            {                
+                Jogo jogoAtual = contexto.rod_jogo.Include("PlacasCompativeis").Include("ProcessadoresCompativeis").First(jog => jog.ID == jogo.ID);
+                jogoAtual.Descricao = jogo.Descricao;
+                jogoAtual.DescricaoRequisitos = jogo.Descricao;
+                jogoAtual.MinimoHD = jogo.MinimoHD;
+                jogoAtual.MinimoMemoria = jogo.MinimoMemoria;
+                jogoAtual.Nome = jogo.Nome;
+                jogoAtual.NomeEmpresa = jogo.NomeEmpresa;
+                jogoAtual.UrlImagem = jogo.UrlImagem;
+                jogoAtual.ProcessadoresCompativeis.Clear();
+                jogoAtual.PlacasCompativeis.Clear();
+                PlacaVideo placa = contexto.rod_placa_video.FirstOrDefault(plac => plac.ID == idPlaca);
+                Processador processador = contexto.rod_processador.FirstOrDefault(proc => proc.ID == idProcessador);
+                jogoAtual.ProcessadoresCompativeis = new List<Processador>();
+                jogoAtual.PlacasCompativeis = new List<PlacaVideo>();
+                jogoAtual.ProcessadoresCompativeis.Add(processador);
+                jogoAtual.PlacasCompativeis.Add(placa);                
+                contexto.SaveChanges();
+            }
+        }
 
         public void SalvarJogo(Jogo jogo, int idProcessador, int idPlaca)
         {

@@ -26,11 +26,13 @@
                 <a href="@Url.Action("VerificarCompativel", "Jogos", new { idJogo = Model.ID })" class="btn btn-block btn-lg btn-padrao">RODA?!</a>
             </div>
         </div>
+        <br />
         <div class="row">
             <div class="col-md-12">
-                <a href="#" class="btn btn-block btn-lg btn-padrao">Editar</a>
+                <a href="@Url.Action("EditarJogo", "Jogos", new { idJogo = Model.ID })" class="btn btn-block btn-lg btn-info">Editar</a>
             </div>
         </div>
+        <br />
         <div class="row">
             <div class="col-md-12">
                 <a href="#" class="btn btn-block btn-lg btn-padrao">Excluir</a>

@@ -26,12 +26,19 @@ namespace Roda.Business.Conversor
             jogoEntity.MinimoMemoria = jogo.MinimoMemoria;
             jogoEntity.DescricaoRequisitos = jogo.DescricaoRequisitos;
             jogoEntity.UrlImagem = jogo.UrlImagem;
+            
 
             if (jogo.ProcessadoresCompativeis != null && jogo.ProcessadoresCompativeis.Any())
+            { 
                 jogoEntity.ProcessadoresCompativeis = ConverterProcessadorModelParaProcessadorEntity(jogo.ProcessadoresCompativeis);
+                jogoEntity.IDProcessador = jogoEntity.ProcessadoresCompativeis.First().ID;
+            }
 
             if (jogo.PlacasCompativeis != null && jogo.PlacasCompativeis.Any())
+            { 
                 jogoEntity.PlacasCompativeis = ConverterPlacaVideoModelParaPlacaVideoEntity(jogo.PlacasCompativeis);
+                jogoEntity.IDPlaca = jogoEntity.PlacasCompativeis.First().ID;
+            }
 
             return jogoEntity;
         }

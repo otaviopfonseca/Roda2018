@@ -74,5 +74,11 @@ namespace Roda.Web.Controllers
             JogoComponent.Get().SalvarJogo(jogo);
             return RedirectToAction("Jogos");
         }
+
+        public ActionResult EditarJogo(int idJogo)
+        {
+            JogoEntity jogo = JogoComponent.Get().ObterJogo(idJogo);
+            return View("~/Views/Roda/FormularioJogo.cshtml", jogo);
+        }
     }
 }

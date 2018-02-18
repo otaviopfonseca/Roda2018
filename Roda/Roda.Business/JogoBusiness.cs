@@ -52,14 +52,17 @@ namespace Roda.Business
 
         public JogoEntity ObterJogo(int idJogo)
         {
-            Jogo jogoSelecionado = JogoDataAccess.ObterJogo(idJogo);
+            Jogo jogoSelecionado = JogoDataAccess.ObterJogoComRequisitos(idJogo);
             return ConversorModelEntity.ConverterJogoModelParaJogoEntity(jogoSelecionado);
         }
 
         public void SalvarJogo(JogoEntity jogo)
         {
             Jogo jogoSalvar = ConversorEntityModel.ConverterJogoEntityEmJogo(jogo);
-            JogoDataAccess.SalvarJogo(jogoSalvar, jogo.IDProcessador, jogo.IDPlaca);
+            if (jogo.ID == 0)
+                JogoDataAccess.SalvarJogo(jogoSalvar, jogo.IDProcessador, jogo.IDPlaca);
+            else
+                JogoDataAccess.EditarJogo(jogoSalvar, jogo.IDProcessador, jogo.IDPlaca);
 
         }
 
