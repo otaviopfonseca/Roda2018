@@ -80,5 +80,11 @@ namespace Roda.Web.Controllers
             JogoEntity jogo = JogoComponent.Get().ObterJogo(idJogo);
             return View("~/Views/Roda/FormularioJogo.cshtml", jogo);
         }
+
+        public ActionResult ExcluirJogo (int idJogo)
+        {
+            JogoComponent.Get().ExcluirJogo(idJogo);
+            return RedirectToAction("Jogos");
+        }
     }
 }

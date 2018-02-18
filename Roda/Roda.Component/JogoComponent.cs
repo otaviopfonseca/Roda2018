@@ -40,6 +40,11 @@ namespace Roda.Component
             return JogoBusiness.ObterJogo(idJogo);
         }
 
+        public void ExcluirJogo(int idJogo)
+        {
+            JogoBusiness.ExcluirJogo(idJogo);
+        }
+
         public void SalvarJogo(JogoEntity jogo)
         {
             JogoBusiness.SalvarJogo(jogo);

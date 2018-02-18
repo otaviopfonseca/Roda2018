@@ -51,3 +51,6 @@ Temporary Items
 /Roda/Roda.DataAccess
 /Roda/Roda.Entities
 /Roda/Roda.Utils
+Roda/Roda.Web/obj/Debug/Roda.Web.dll
+Roda/Roda.Web/obj/Debug/Roda.Web.pdb
+Roda/Roda.Web/obj/Debug/Roda.Web.csprojResolveAssemblyReference.cache

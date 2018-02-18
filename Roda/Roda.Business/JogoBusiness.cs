@@ -66,6 +66,11 @@ namespace Roda.Business
 
         }
 
+        public void ExcluirJogo (int idJogo)
+        {
+            JogoDataAccess.ExcluirJogo(idJogo);
+        }
+
         public bool VerificarSeJogoEhCompativel(int idJogo, int iDPlacaVideo, int iDProcessador, double memoria, double hD)
         {
             Jogo jogoSelecionado = JogoDataAccess.ObterJogoComRequisitos(idJogo);

@@ -36,6 +36,20 @@ namespace Roda.DataAccess
             }
         }
 
+        public void ExcluirJogo(int idJogo)
+        {
+            using (RodaContext contexto = new RodaContext())
+            {
+                Jogo jogoSelecionado = (from jogo in contexto.rod_jogo.Include("PlacasCompativeis").Include("ProcessadoresCompativeis")
+                                        where jogo.ID == idJogo
+                                        select jogo).FirstOrDefault();
+                jogoSelecionado.PlacasCompativeis.Clear();
+                jogoSelecionado.ProcessadoresCompativeis.Clear();
+                contexto.rod_jogo.Remove(jogoSelecionado);
+                contexto.SaveChanges();
+            }
+        }
+
         public void EditarJogo(Jogo jogo, int idProcessador, int idPlaca)
         {
             using (RodaContext contexto = new RodaContext())
